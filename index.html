@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>HTML</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css">
+        <link rel="stylesheet" href="css/presentation.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>                    <img src="img/angular-logo.png" alt="Angular logo" />
+</h1>
+                    <h2><a href="http://www.frro.utn.edu.ar">Utn Rosario</a></h2>
+                    <h3>TTADS</h3>
+                    <h3>
+                      <a href="https://github.com/utnfrrottads/">
+
+                        Técnicas y Tecnologías Avanzadas de Desarrollo de Software</a>
+                    </h3>
+                    <p>
+                      <a href="https://github.com/aotaduy">Ing. Andres Otaduy</a>
+                    </p>
+                </section>
+                <section>
+                  <section>
+                      <h2>HTML + HTTP Paginas Estaticas</h2>
+                      <a href="http://info.cern.ch/hypertext/WWW/TheProject.html">Primer pagina web</a>
+                      <a href="http://line-mode.cern.ch/www/hypertext/WWW/TheProject.html">Emulador</a><br>
+                      <img src="img/theproject.png" alt="" height="400px" />
+                  </section>
+                  <section>
+                    <h1>Evolucion FrontEnd</h1>
+                      <h2>HTML + Imagenes + Tablas</h2>
+                      <img src="img/mosaic.png" alt=""  height="400px"/>
+                  </section>
+                  <section>
+                    <h2>Hypermedia: HTML + Imagenes + Tablas</h2>
+
+                    <img src="img/geocities1.png" alt=""  height="350px" />
+                    <img src="img/geocities2.png" alt=""  height="350px" />
+
+                </section>
+                <section>
+                  <h2>Web Applications</h2>
+                  <p>
+                    Perl, ASP, PHP, Apache, MySQL
+                  </p>
+                  <img src="img/yahoo.jpg" alt=""  height="350px" />
+                  <img src="img/hotmail.jpg" alt=""  height="350px" />
+
+              </section>
+              <section>
+                <h2>Single Page Applications</h2>
+                <p>
+                  NodeJs, Java, C#, MongoDB, Javascript, REST API
+                </p>
+                <img src="img/gmail.png" alt=""  height="300px" />
+                <img src="img/facebook.png" alt=""  height="250px" />
+            </section>
+            <section>
+              <h1>SPA: Single Page Applications</h1>
+              <ul>
+                <li>Servicios REST</li>
+                <li>Frameworks Front End Angualr, ember, knockout, React</li>
+                <li>Separacion de Intereses</li>
+                <li>Division de Backend / Frontend</li>
+                <li>Mobile o Mobile First</li>
+                <li><a href="https://www.madewithangular.com/">Examples</a></li>
+              </ul>
+            </section>
+            </section>
+            <section>
+            <section>
+              <h1>Angular.js</h1>
+              <ul>
+                <li>Framework front end Opinionated</li>
+                <li>Declarativo</li>
+                <li>Extiende HTML</li>
+                <li>Testeabilidad</li>
+                <li>Componentes</li>
+                <li>Alto Nivel</li>
+                <li>Aplicaciones ABM</li>
+                <li>MVC - MVVM</li>
+                <li>Facil de instalar</li>
+                <li>Algunas Desventajas</li>
+              </ul>
+              <img src="img/angular-diagram.jpeg" alt="" />
+            </section>
+            <section>
+              <h1>Como Empezar</h1>
+              <p>
+                Cargar el script de angular, usar la directiva ng-app
+              </p>
+              <pre><code class="html">&lt;!doctype html&gt;
+&lt;html ng-app&gt;
+  &lt;head&gt;
+  &lt;title&gt;My Angular App&lt;/title&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Add your template here --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+            </section>
+            <section>
+              <h1>Estructura</h1>
+              <img src="img/angular-structure.png" alt="" />
+            </section>
+            <section>
+              <h1>Views - Templates - Directivas</h1>
+              <ul>
+                <li>Two way binding {{}}</li>
+                <li>Directivas del Framework<ul>
+                  <li>ng-app</li>
+                  <li>ng-init</li>
+                  <li>ng-model</li>
+                  <li>ng-if, ng-show</li>
+                  <li>ng-repeat</li>
+                  <li>ng-class</li>
+                </ul></li>
+              </ul>
+              <iframe src="/words.html" width="300px" height="300px" style="margin-left: 30px; border: 1px solid gray"></iframe>
+            </section>
+            <section>
+              <h1>Data Binding</h1>
+              <p>
+                <ol>
+                  <li>Compilacion del template</li>
+                  <li>Cambio en la vista actualiza el modelo</li>
+                  <li>Cambio en el modelo actualiza la vista ir a 2</li>
+                  <li>Cuando modelo y vista estan estables render del DOM</li>
+                </ol>
+              </p>
+              <img src="img/one-way.png" alt="" />
+              <img src="img/two-way.png" alt="" />
+            </section>
+            <section>
+              <h1>Todo List</h1>
+              <iframe src="/todo-list.html" width="400px" height="300px" style="margin-left: 30px; border: 1px solid gray"></iframe>
+
+            </section>
+            <section>
+              <h1>Filters</h1>
+              <p>
+                Es una funcion sin efectos secundarios que toma un valor del template o de otro filtro y lo reemplaza por otro.
+              </p>
+              <p>Sintaxis:
+              <code>{{expresion | filter1: param1 : param2 | filter2 : param21 | filter3 ...}}</code>
+              </p>
+              <ul>
+                <li>currency</li>
+                <li>number</li>
+                <li>orderBy</li>
+                <li>json</li>
+                <li>limitTo</li>
+                <li>filter</li>
+              </ul>
+            </section>
+            <section>
+              <h1>Ejercicio</h1>
+              <p>
+                Ordenar alfabeticamente los elementos del Todo List.
+                Agregar un color de fondo gris a los elementos que estan completados del todo list.
+              </p>
+            </section>
+
+          </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
+                center: false,
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
