@@ -88,14 +88,130 @@
             </section>
             </section>
             <section>
+              <section>
+                <h1>Javascript</h1>
+                <p>
+                  Libro: Javascript the good parts
+                </p>
+                <p>
+                  Conferencia en google <a href="https://www.youtube.com/watch?v=lP9-Zx_cCUg">Javascript the good parts subtitulada</a>
+                </p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN</a>
+                <a href="https://developer.mozilla.org/es/docs/Web/JavaScript">MDN en castellano</a>
+              </section>
+              <section>
+                Javascript
+                <ul>
+                  <li>Uno de los lenguajes mas usados e incomprendidos del mundo</li>
+                  <li>Obligatorio para programar en el browser</li>
+                  <li>Interfaz Con el DOM</li>
+                  <li>Sintaxis de C, Semantica de Scheme</li>
+                </ul>
+              </section>
+              <section>
+                <h1>Javascript influencias</h1>
+                <ul>
+                  <li>Scheme</li>
+                  <li>Java</li>
+                  <li>Self</li>
+                  <li>Perl</li>
+                </ul>
+              </section>
+              <section>
+                <h1>Javascript Good Parts</h1>
+                <ul>
+                  <li>Loose Typing</li>
+                  <li>Objetos Dinamicos</li>
+                  <li>Funciones Lambda</li>
+                  <li>Objetos Literales</li>
+                  <li>Herencia prototipica</li>
+                  <li>Es facil!</li>
+                </ul>
+              </section>
+              <section>
+                <h1>Funciones Lambda</h1>
+                <pre><code class="js">var cuad, cubo, array = [1,2,3,4];
+cuad = function(a){
+  return a * a;
+};
+cubo = function(a) {
+  return cuad(a) * a;
+};
+
+array.map(cuad) + array.map(cubo);
+console.log(array.reduce(0, suma));
+
+function suma(a,b) {
+  return a + b;
+}
+</code></pre>
+              </section>
+              <section>
+                <h1>Objetos dinamicos</h1>
+                <pre><code class="js">var object = {name: 'Jon'};
+object.lastName = 'Smith';
+object.print = function(){
+  console.log('Name:', this.name);
+  console.log('LastName:', this.lastName)};
+object.print();</code></pre>
+              </section>
+              <section>
+                <h1>Objetos Literales</h1>
+                <pre><code class="js">{
+  "glossary":{
+    "title":"example glossary",
+    "GlossDiv":{
+      "title":"S",
+      "GlossList":{
+        "GlossEntry":{
+          "ID":"SGML",
+          "SortAs":"SGML",
+          "GlossTerm":"Standard Generalized Markup Language",
+          "Acronym":"SGML",
+          "Abbrev":"ISO 8879:1986",
+          "GlossDef":{
+            "para":"A meta-markup language, used to create markup languages such as DocBook.",
+            "GlossSeeAlso":[
+              "GML",
+              "XML"
+            ]
+          },
+          "GlossSee":"markup"
+        }
+      }
+    }
+  }
+}</code></pre>
+              </section>
+              <section>
+                <h1>Javascript Bad Parts</h1>
+                <ul>
+                  <li>Variables Globales</li>
+                  <li>Interfaz con el DOM</li>
+                  <li>Insercion de punto y coma</li>
+                  <li>comparaciones == !=</li>
+                  <li>Es facil!</li>
+                </ul>
+              </section>
+              <section>
+                <h1>Correr JS</h1>
+                <ul>
+                  <li>Embebido</li>
+                  <li>Scripts</li>
+                  <li>NodeJs</li>
+                </ul>
+              </section>
+            
+            </section>
+            <section>
             <section>
               <h1>Angular.js</h1>
               <ul>
                 <li>Framework front end Opinionated</li>
-                <li>Declarativo</li>
+                <li>Templates Declarativos</li>
                 <li>Extiende HTML</li>
-                <li>Testeabilidad</li>
                 <li>Componentes</li>
+                <li>Testeabilidad</li>
                 <li>Alto Nivel</li>
                 <li>Aplicaciones ABM</li>
                 <li>MVC - MVVM</li>
@@ -105,23 +221,66 @@
               <img src="img/angular-diagram.jpeg" alt="" />
             </section>
             <section>
+              <h1>Templates Declarativos</h1>
+              <h2>Extiende HTML</h2>
+              <pre><code class="js">&lt;div class=&quot;row&quot;&gt;
+    &lt;h2&gt;Search movies&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-xs-12&quot;&gt;
+        &lt;search-box autocomplete=&quot;searchVm.topMovieNames&quot; search-callback=&quot;searchVm.updatedSearch&quot;&gt;&lt;/search-box&gt;
+        &lt;movie-listing  movies=&quot;searchVm.movies&quot;&gt;&lt;/movie-listing&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+&lt;/div&gt;
+&lt;home-footer&gt;&lt;/home-footer&gt;</code></pre>
+            </section>
+            <section>
+              <h1>Componentes</h1>
+              <img src="img/components.png" alt="" />
+            </section>
+            <section>
+              <h1>Testeabilidad</h1>
+              <p>
+                <img src="img/protractor-logo.png" height="100px" alt="" />
+                <br>
+                <img src="img/mocja.svg" height="200px" alt="" />
+                <img src="img/chai-logo.png" height="200px" alt="" />
+              </p>
+              <ul>
+                <li>unit test - mocha jasmine</li>
+                <li><a href="http://www.protractortest.org/#/">Protractor</a></li>
+              </ul>
+            </section>
+            <section>
+              <h1>Angular.js</h1>
+              <ul>
+                <li>Alto Nivel</li>
+                <li>Aplicaciones ABM</li>
+                <li>MVC - MVVM</li>
+                <li>Facil de instalar</li>
+                <li>Algunas Desventajas</li>
+              </ul>
+            </section>
+            <section>
               <h1>Como Empezar</h1>
               <p>
                 Cargar el script de angular, usar la directiva ng-app
               </p>
               <pre><code class="html">&lt;!doctype html&gt;
-&lt;html ng-app&gt;
-  &lt;head&gt;
-  &lt;title&gt;My Angular App&lt;/title&gt;
-    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- Add your template here --&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+                &lt;html ng-app&gt;
+                &lt;head&gt;
+                &lt;title&gt;My Angular App&lt;/title&gt;
+                &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js&quot;&gt;&lt;/script&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                &lt;!-- Add your template here --&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;</code></pre>
 
 
-            </section>
+              </section>
             <section>
               <h1>Estructura</h1>
               <img src="img/angular-structure.png" alt="" />
@@ -184,6 +343,55 @@
               </p>
             </section>
 
+            <section>
+              <h1>Controllers</h1>
+              <p>
+                MVC Model View Controller vs MVVM Model View ViewModel
+              </p>
+              <img src="img/mvvm.png" alt="" />
+            </section>
+            <section>
+              <h1>scpoe</h1>
+              <img src="img/databinding.png" alt="" />
+              <ul>
+                <li>El contexto de ejecucion de una view</li>
+                <li>Puede alojar estado y comportamiento</li>
+                <li>Organizado jerarquicamente</li>
+                <li>Puede disparar eventos</li>
+                <li>Encargado del Two way binding</li>
+              </ul>
+            </section>
+            <section>
+              <h1>Controller</h1>
+              <ul>
+                <li>Aumentan el scope con funciones y estado</li>
+                <li>Setean el estado inicial e una vista</li>
+                <li>ng-controller</li>
+                <li>Controller y Scope</li>
+                <li>Estilo</li>
+                <li>ng-include</li>
+              </ul>
+              <img src="img/databinding-controller.png" alt="" />
+            </section>
+            <section>
+              <h1>Ejemplo</h1>
+              <ul>
+                <li><a href="./examples/todo-list">Todo List controller</a></li>
+                <li> <a href="./examples/users-list">User List</a></li>
+              </ul>
+            </section>
+            <section>
+              <h1>Ejercicio</h1>
+              <p>
+                Modificar el ejemplo en <a href="./examples/users-list">User List</a> para:
+                <ul>
+                  <li>Agregar los campos de apellido y telefono y mostrarlos en la lista</li>
+                  <li>Agregar un boton para cambiar el password del usuario usar la funcion <a href="https://developer.mozilla.org/es/docs/Web/API/window/prompt">prompt()</a> para obtener el password</li>
+                  <li>Agregar un boton que permita eliminar todos los elementos seleccionados</li>
+                  <li>Agregar un campo para mostrar la edad en la lista y ordenar la lista por este campo</li>
+                </ul>
+              </p>
+            </section>
           </section>
             </div>
         </div>
