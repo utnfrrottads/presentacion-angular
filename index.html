@@ -401,6 +401,175 @@ object.print();</code></pre>
                 </ul>
               </p>
             </section>
+            <section>
+              <h1>Directivas Basicas</h1>
+              <p>
+                Las directivas son marcadores en el DOM (elementos, atributos, classes o comentarios). Para extender el HTML, modificar el comportamiento de los elementos o de sus hijos.
+              </p>
+              <p>
+                Angular compila en tiepo de ejecucion los templates buscando directivas y agregando comportamiento a los elementos del DOM.
+              </p>
+            </section>
+            <section>
+              <h1>Directivas - Componentes</h1>
+              <ul>
+                <li>Tipo de la Directiva EAC</li>
+                <li>Template</li>
+                <li>Scope</li>
+                <li>controllerAs</li>
+                <li>bindToController</li>
+              </ul>
+              <p>
+                Api completa en <a href="https://docs.angularjs.org/api/ng/service/$compile">https://docs.angularjs.org/api/ng/service/$compile</a>
+              </p>
+            </section>
+            <section>
+              <h1>Ejemplo</h1>
+              <pre><code class="js">  angular
+        .module('moviesApp')
+        .directive('searchBox', searchBoxDirective);
+    function searchBoxDirective() {
+        return {
+            restrict: 'E',
+            // template: '<div></div>',
+            templateUrl: 'app/components/search-box/search-box.html',
+            scope: {
+                query: '=?',
+                autocomplete: '=',
+                searchCallback: '='
+            },
+            bindToController: true,
+            controller: 'SearchBoxController',
+            controllerAs: 'searchVm'
+        };
+    }</code></pre>
+            </section>
+            <section>
+              <h1>Ejemplo HTML</h1>
+              <pre><code class="html"><pre><code class="js">&lt;div class=&quot;row&quot;&gt;
+    &lt;h2&gt;Search movies&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-xs-12&quot;&gt;
+        &lt;search-box autocomplete=&quot;searchVm.topMovieNames&quot; search-callback=&quot;searchVm.updatedSearch&quot;&gt;&lt;/search-box&gt;
+        &lt;movie-listing  movies=&quot;searchVm.movies&quot;&gt;&lt;/movie-listing&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+&lt;/div&gt;
+&lt;home-footer&gt;&lt;/home-footer&gt;</code></pre></code></pre>
+            </section>
+            <section>
+              <h1>Otros tipos de directivas</h1>
+              <p>
+                Las veremos mas adelante.
+              </p>
+              <ul>
+                <li>Manipulacion del DOM</li>
+                <li>Compilacion</li>
+                <li>Transclusion</li>
+              </ul>
+            </section>
+            <section>
+              <h1>Ejercicio</h1>
+              <p>
+                Modificar el ejemplo de la lista de usuarios para usar dos directivas, una para la lista, y otra para el formulario de entrada de los datos
+              </p>
+            </section>
+            <section>
+              <h1>Servicios Angular</h1>
+              <p>
+                Son objetos singleton no visuales con lazy initialization, que se pueden inyectar a traves del sistema de injeccion de dependencias en otros componentes.
+              </p>
+              <ul>
+                <li>Comunicar Directivas y Controladores</li>
+                <li>Compartir y Reusar codigo</li>
+                <li>Acceder a las API del browser</li>
+                <li>Manejar la comunicacion HTTP</li>
+              </ul>
+            </section>
+            <section>
+              <h1>Servicios Angularjs</h1>
+              <img src="img/angular-services.png" alt="" />
+            </section>
+            <section>
+              <h1>Servicios de Angular</h1>
+              <ul>
+                <li>Browser: $window, $location, $anchorScroll, $timeout</li>
+                <li>Angular: $filter(‘limitTo’), $controller, $log, $rootScope, $scope</li>
+                <li>Templates: $compiler, $parse, $interpolate</li>
+                <li>Promises: $q</li>
+                <li>API Calls: $http, $resource, $xhrFactory</li>
+                <li>Seguridad: $sce, $sceDelegate</li>
+              </ul>
+            </section>
+            <section>
+              <h1>Injeccion de Dependencias</h1>
+              <p class="fragment">
+                Inversion de control, para configurar y testear
+              </p>
+              <ul class="fragment">
+                <li>Dependencia de Creacion: <code> collection = new Array()</code></li>
+                <li>Variable Global: <code>window.location = ‘http://www.google.com’</code></li>
+                <li>PAsar como parametro: <code>function factory(collectionClass){ collection = new collectionClass();}</code></li>
+              </ul>
+            </section>
+            <section>
+              <h1>Sintaxis de DI</h1>
+              <pre><code class="js">    // Reflection notation
+    angular.module('website').
+    controller('PageController', PageController);
+    function PageController($scope, $timeout){};
+
+    // $inject notation
+    angular.module('website').
+    controller('PageController', PageController);
+     PageController.$inject = [‘$scope’, ‘$timeout’];
+     function PageController($scope, $timeout){};
+
+    // Array notation
+    angular.module('website').
+    controller('PageController',
+      [‘$scope’, ‘$timeout’, function($scope, $timeout){}]
+    );
+    </code></pre>
+            </section>
+            <section>
+              <h1>Creacion de un servicio</h1>
+              <pre><code class="js">(function() {
+    angular
+        .module('webapp')
+        .factory('socialSharing', service);
+
+    service.$inject = [
+        '$window'
+    ];
+
+    function service($window) {
+        var service = this;
+        service.shareWithNetwork = shareWithNetwork;
+        return service;
+
+        function shareWithNetwork(name, url, networkFun, label) {
+            if (!$window.plugins || !$window.plugins.socialsharing) {
+              return reportShareError(label);
+            }
+            $window.plugins.socialsharing[networkFun](name, null, url, angular.noop, function () {
+              reportShareError(label);
+            });
+          }
+        }
+}</code></pre>
+            </section>
+            <section>
+              <h1>Ejercicio</h1>
+              Modificar el ejemplo de la lista de usuarios para que utilizando <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage">Storage</a> y <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage">localStorage</a> la lista de usuarios sea persistente.
+              Crear un servicio angular que encapsule la lista de usuarios y la mantenga actualizada en localStorage.
+              el servicio deberia tener una interfaz con los metodos para agregar, eliminar, actualizar un elemento y obtener la lista de todos los usuarios.
+            </section>
+            <section>
+              <h1>Promesas - $q</h1>
+            </section>
           </section>
             </div>
         </div>

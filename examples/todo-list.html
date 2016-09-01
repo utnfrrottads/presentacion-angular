@@ -7,23 +7,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <!-- Latest compiled and minified JavaScript -->
 
+      <style media="screen">
+        .large {
+          font-size: 40px;
+          color: gray;
+        }
+      </style>
     </head>
     <body>
         <div class="container">
             <div class="row" ng-init="list=[]">
-                <h2>Todo List #{{list.length}}</h2>
+                <h2 class="large" ng-class="{'large': list.length > 4}">Todo List #{{list.length}}</h2>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <input id="input" type="text" ng-model="itemText">
-                    <input id="add-button" class="btn btn-default" type="button" value="Add" ng-click="list.push({text:itemText, done: false}); itemText = ''">
+                    <input id="add-button" class="btn btn-default" type="button" value="Add"
+                    ng-click="list.push({text:itemText, done: false}); itemText = ''">
                 </div>
                 <div ng-repeat="item in list" class="col-xs-12">
                     <h4>
                         <input type="checkbox" ng-model="item.done">
                         {{item.text}}
-                        <input class="btn btn-default btn-xs" type="button" value="X" ng-click="list.splice(list.indexOf(item), 1)">
+                        <input class="btn btn-default btn-xs" type="button" value="X"
+                        ng-click="list.splice(list.indexOf(item), 1)">
                     </h4>
+                    {{item | json}}
                 </div>
             </div>
         </div>

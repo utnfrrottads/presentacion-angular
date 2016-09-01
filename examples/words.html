@@ -11,12 +11,20 @@
         <div class="container">
             <form>
                 <h2>Text Analyzer</h2>
-                <textarea class="form-control" id="input" rows="3" ng-model="text" placeholder="Enter text to be processed"></textarea>
+                <textarea
+                  class="form-control"
+                  id="input"
+                  rows="3"
+                  ng-model="text"
+                  placeholder="Enter text to be processed"></textarea>
                 <h2>Stats</h2>
-                <h3>Chars: <span id="chars">{{text.length}}</span> Words: <span>{{(text.split(' ')).length}}</span></h3>
+                <h3>Chars: <span id="chars">{{text.length + 1000}}</span> Words: <span>{{(text.split(' ')).length}}</span></h3>
+                El texto es {{text}}
                 <ul>
-                    <li ng-repeat="word in (text.split(' ')) | orderBy">{{word | uppercase}}</li>
+                    <li ng-repeat="word in (text.split(' '))"
+                        ng-if="word.length > 2">{{word | uppercase}}</li>
                 </ul>
+                <a href="#" ng-click="text = 'peperino'"> reset</a>
             </form>
         </div>
     </body>
