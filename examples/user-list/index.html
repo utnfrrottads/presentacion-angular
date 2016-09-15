@@ -1,10 +1,12 @@
 <html>
     <head>
-        <script src="/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/bower_components/angular/angular.js"></script>
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+
         <!-- Include file with the controller -->
         <script src="./user-list.controller.js"></script>
         <style>
@@ -47,7 +49,7 @@
                   <label for="">
                   Fecha de nacimiento:
                   </label>
-                    <input type="date" placeholder="fecha de nacimiento" ng-model="usersVm.item.password">
+                    <input type="date" placeholder="fecha de nacimiento" ng-model="usersVm.item.dateOfBirth">
                 </div>
                 <div class="col-xs-12">
                     <input class="btn btn-default" type="submit" value="Add" ng-click="usersVm.add(usersVm.item)">

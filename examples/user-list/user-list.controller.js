@@ -15,11 +15,17 @@
         var vm = this;
         // Initialization
         vm.list = [];
-        vm.item = {};
+        vm.item = {
+            name: '',
+            lastname: '',
+            phone: '',
+            email: '',
+            dateOfBirth: ''};
 
         // Controller methods
         vm.add = add;
         vm.remove = remove;
+        vm.edit = edit;
 
         /* Adds an item to the todo list */
         function add(item) {
