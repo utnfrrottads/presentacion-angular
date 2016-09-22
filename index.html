@@ -568,9 +568,177 @@ object.print();</code></pre>
               el servicio deberia tener una interfaz con los metodos para agregar, eliminar, actualizar un elemento y obtener la lista de todos los usuarios.
             </section>
             <section>
-              <h1>Promesas - $q</h1>
+              <h1>$http</h1>
+              <p>
+                $http permite realizar llamadas http en sus diferentes metodos. devolviendo una promesa por el resultado de la llamada.
+              </p>
+              <pre><code class="js">
+  // Simple GET request example:
+  $http({
+    method: 'GET',
+    url: '/someUrl'
+  }).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });</code></pre>
+
             </section>
+            <section>
+              <h1>$http respuesta</h1>
+              <ul>
+                <li>data – {string|Object} response body</li>
+                <li>status – {number} – HTTP status code of the response.</li>
+                <li>headers – {function([headerName])} – Header getter function.</li>
+                <li>config – {Object} – The configuration object</li>
+                <li>statusText – {string} – HTTP status text of the response.</li>
+              </ul>
+              <h3>Shortcut</h3>
+              <pre><code class="js">$http.get('/someUrl', config).then(successCallback, errorCallback);
+$http.post('/someUrl', data, config).then(successCallback, errorCallback);</code></pre>
+            </section>
+            <section>
+              <h1>$http ejemplos</h1>
+              <ul>
+                <li><a href="https://github.com/aotaduy/angular-example/blob/master/client/app/components/movies-connector/moviesConnector.factory.js"> Movies</a></li>
+                <li><a href="https://github.com/aotaduy/angular-example/tree/master/client/demo/random">Random Demo</a></li>
+              </ul>
+            </section>
+            <section>
+              <h1>Promesas - $q</h1>
+              <p>
+                Una promesa es un objeto que representa un valor que puede estar disponible ahora, en el futuro o nunca.
+              </p>
+              <p>
+                Trabajamos con promesas para computar valores de forma asincrona tomando acciones cuando el valor esta disponible o cuando se produce un error.
+              </p>
+            </section>
+            <section>
+              <h1>Promesas - $q</h1>
+              <p>
+                Una promesa puede tener tres estados, <b>pendiente</b> (pending), <b>resuelto</b> (resolved), <b>rechazado</b>(rejected).
+              </p>
+              <p>
+                Usando then(), catch(), finally() podemos tomar acciones ante los diferentes estados de la promesa.
+              </p>
+            </section>
+            <section>
+              <h1>Promesas</h1>
+              <pre><code class="js">
+function(aPromise, $q) {
+  aPromise
+    .then(successCallback, errorCallback)
+    .catch(errorCallback)
+    .finally(finallyCallback);
+  rejected = $q.reject();
+  resolved = $q.when();
+  newPromise = $q.all([rejected, resolved, aPromise]);
+  newPromise = $q.race([rejected, resolved, aPromise]);
+  //Create promises
+  deferred = $q.defer();
+  deferred.resolve(aValue);
+  deferred.reject(aValue);
+  return deferred.promise;
+}</code></pre>
+<p>
+  <a href="http://taoofcode.net/promise-anti-patterns/"> antipatterns</a>
+
+</p>
+            </section>
+            <section>
+              <h1>Anti-patterns</h1>
+              <pre><code class="js">
+function anAsyncCall() {
+  var promise = doSomethingAsync();
+  promise.then(function() {
+      somethingComplicated();
+  });
+
+  return promise;
+}</code></pre>
+<pre class="fragment"><code class="js">
+function anAsyncCall() {
+    var promise = doSomethingAsync();
+    return promise.then(function() {
+        somethingComplicated()
+    });
+}
+}</code></pre>
+<h2 class="fragment"> Broken Chain</h2>
+            </section>
+            <section>
+              <h1>Anti-patterns</h1>
+              <pre><code class="js">somethingAsync.then(
+  function() {
+      return somethingElseAsync();
+  },
+  function(err) {
+      handleMyError(err);
+});</code></pre>
+<pre class="fragment"><code class="js">somethingAsync
+  .then(function() {
+      return somethingElseAsync();
+  })
+  .catch(function(err) {
+      handleMyError(err);
+  });</code></pre>
+<h2 class="fragment"> Keen Error Handler</h2>
+</section>
+<section>
+<h1>Anti-patterns</h1>
+<pre><code class="js">var promise;
+if (asyncCallNeeded)
+promise = doSomethingAsync();
+else
+promise = $q.when(42);
+
+promise.then(function() {
+doSomethingCool();
+});</code></pre>
+<pre class="fragment"><code class="js">$q.when(asyncCallNeeded ? doSomethingAsync() : 42)
+.then(function(value){
+  doSomethingGood();
+})
+.catch(function(err) {
+  handleTheError();
+});
+}</code></pre>
+<h2 class="fragment"> The Ghost Promise</h2>
+</section>
+<section>
+<h1>Anti-patterns</h1>
+<pre><code class="js">var deferred = $q.defer();
+doSomethingAsync().then(function(res) {
+  res = manipulateMeInSomeWay(res);
+  deferred.resolve(res);
+}, function(err) {
+  deferred.reject(err);
+});
+
+return deferred.promise;</code></pre>
+<pre class="fragment"><code class="js">return doSomethingAsync().then(function(res) {
+  return manipulateMeInSomeWay(res);
+});</code></pre>
+<h2 class="fragment"> The Forgotten Promise</h2>
+</section>
+<section>
+  <h1>Ejercicio</h1>
+  <p>
+    Crear un juego de ruleta virtual que permita sortear un numero, el numero, el color, y si es par o impar y la docena a la que pertenece. No hace falta mostrar el tablero.
+    <br>
+    los numeros aleatorios deben generarse usando la APi de random.org ver: <a href="https://api.random.org/json-rpc/1/introduction">Intro</a> y <a href="https://api.random.org/json-rpc/1/">Json rpc api</a> con el metodo generateIntegers.
+  </p>
+  <p>
+    Numeros Negros: [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+  </p>
+  <p>
+    Numeros Rojos: [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+  </p>
+</section>
           </section>
+
             </div>
         </div>
 
