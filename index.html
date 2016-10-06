@@ -738,6 +738,175 @@ return deferred.promise;</code></pre>
   </p>
   APi Key: 2d87f134-9c82-4485-a79f-4d2e14129468
 </section>
+                  <section>
+                    <h1>UI Router</h1>
+                    <ul>
+                      <li>Estados y Views anidadas</li>
+                      <li>Vistas multiples</li>
+                      <li>Resolves</li>
+                      <li>Datos por estadi</li>
+                      <li>Parametros URL</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Components</h1>
+                    <img src="img/stateDiagram.png" alt="" width="80%"/>
+                    <small>  $stateProvider / $state
+                      ui-sref
+                      ui-view
+                      $urlRouter / $urlRouterProvider</small>
+                  </section>
+
+                  <section>
+                    <h1>Basico</h1>
+                        template, templateUrl
+                        resolve
+                        custom-data, $stateParams
+                      <pre>
+                        <code class="javascript">
+  $stateProvider
+    .state('movie-page', {
+        title: 'Movie',
+        url: '/movie/:movieId',
+        templateUrl: 'app/pages/movie/movie-page.html',
+        controller: 'MoviePageController',
+        controllerAs: 'movieVm',
+        resolve: {
+            movie: ['$stateParams', 'moviesConnector',
+                function($stateParams, moviesConnector) {
+                  var id = $stateParams.movieId;
+                    return moviesConnector.movieInfo(id)
+                      .then(function (response) {
+                          return response.data;
+                      });
+                    }]
+                  }
+                });
+              </code>
+                      </pre>
+                  </section>
+                  <section>
+                    <h1>API basica</h1>
+                    <ul>
+                      <li>$stateProvider.state(name, {})</li>
+                      <li>$state.go(state, params, {location: true, reload:false, notify:true})</li>
+                      <li>$state.get</li>
+                      <li>urlRouterProvider</li>
+                      <li>ui-view ui-sref</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Ejemplo</h1>
+                    <h3>
+                      Agregar una pagina que muestre las peliculas que se estan viendo.
+                    </h3>
+                    <p>
+                      Agregar una pagina que muestre las peliculas que se estan viendo. en se pueden obtener los datos /api/movies/playing usando un resolve para obtener los datos.
+                      el componente <code>moviesConnector</code> tiene el metodo para recuperar los datos.
+                    </p>
+                  </section>
+                  <section data-markdown>
+                    <script type="text/template">
+                    # State Parameters
+                    Algunos Ejemplos
+                    ```javascript
+                    url: "/contacts/:contactId" // $stateParams.contactId
+
+                    url: "/contacts/{contactId}" // Same as above
+
+                    url: '/user/{id:int}' // id as integer
+
+                    url: '/user/{id:[0-9a-fA-F]{1,8}}' // RegExp
+
+                    url: "/contacts?myParam1&myParam2" // $stateParams.myParam1
+                    ```
+                  </script>
+                  </section>
+                  <section>
+                    <h1>Eventos</h1>
+                    <ul>
+                      <li>$stateChangeStart</li>
+                      <li>$stateChangeEnd</li>
+                      <li>$stateChangeError</li>
+                      <li>event, fromState, toState, paramters</li>
+                      <li><code>event.preventDefault()</code> para detener la transicion</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Tecnicas</h1>
+                    <h3>Scope CSS</h3>
+                    <p>
+                      Agregando una clase que corresponde al estado se pueden acotar los css a cada pagina.
+                    </p>
+                    <h3>Manejo de Errores</h3>
+                    <ul>
+                      <li>Poner un event handler al principio del proyecto</li>
+                      <li>Crear un mecanismo de redirectTo</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Tecnicas</h1>
+                    <h3>Manejar Autenticacion y login</h3>
+                      <p>
+                        Interceptar eventos para proteger paginas.
+                      </p>
+                      <pre>
+                        <code class="javascript">
+$rootScope.$on('$stateChangeStart', function(e, to) {
+  if (!to.forceLogin) return;
+  if (!isLoggedIn($currentUser)) {
+    e.preventDefault();
+    // Optionally set option.notify to false if you don't want
+    // to retrigger another $stateChangeStart event
+    $state.go(result.to, result.params, {notify: false});
+  }
+                        </code>
+                      </pre>
+                  </section>
+                  <section>
+                    <h1>Manejo de URL</h1>
+                    <ul>
+                      <li>urlRouterProvider</li>
+                      <li>when(what, String|Function) ret: false|String|true</li>
+                      <li>otherwise(String|Function)</li>
+                      <li>rule(Function) ret: Set the url</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Estados anidados</h1>
+                    <ul>
+                      <li>Relacion Padre Hijo</li>
+                      <li>Herencia de resolves y datos custom</li>
+                      <li>Prefix Url</li>
+                      <li>Estados abstractos</li>
+                      <li>Notacion punto o propiedad parent</li>
+                      <li>El padre debe existir</li>
+                      <li>Herencia de Scopes</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h1>Estados Abstractos</h1>
+                    <ul>
+                      <li>Para concatenar al prinicipio un<a href="https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-routing-for-nested-states"><code>url</code></a> to all child state urls.</li>
+                      <li>Para insertar <a href="https://github.com/angular-ui/ui-router/wiki#templates"><code>template</code></a> con sus propias<code>ui-view(s)</code>que los estados hijos van a completar.
+
+                      </li>
+                      <li>Para <a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#inherited-resolved-dependencies">proveer dependencies resueltas</a> via <code>resolve</code>.</li>
+                      <li>Para <a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#inherited-custom-data">proveer datos heredades</a> via propiedad<code>data</code> .</li>
+                      <li>Para correr callbacks <code>onEnter</code> o <code>onExit</code> que puedan modificar la app de alguna forma.</li>
+                      <li>Cualquier combinacion de lo anterior.</li>
+                      </ul>
+                  </section>
+                  <section>
+                    <h1>Ejercicio</h1>
+                    <p>
+                      Agregar en angular example:
+                      <ul>
+                        <li>Una pagina /list que muestre las peliculas mas populares.</li>
+                        <li>Agregar a la pagina de search los parametros para controlar el orden, por el campo nombre o popularidad y permitir un orden ascendente o descendente</li>
+                      </ul>
+                    </p>
+                  </section>
           </section>
 
             </div>
