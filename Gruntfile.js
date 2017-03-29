@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 					hostname: '*',
 					port: port,
 					base: base,
-					livereload: true,
+					livereload: 35740,
 					open: true
 				}
 			}
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
 				files: [ '*.md' ]
 			},
 			options: {
-				livereload: true
+				livereload: 35740
 			}
 		}
 
